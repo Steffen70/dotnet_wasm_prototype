@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <script type="text/javascript" src="%PACKAGE_GUID%/require.js"></script>
+        <script type="module" src="%PACKAGE_GUID%/uno-bootstrap.js"></script>
+
+        <title>WASM Test</title>
+
+        <style>
+            .uno-loader {
+                display: none;
+            }
+        </style>
+    </head>
+    <body id="uno-body">
+        <!-- Required by the uno bootstraper -->
+        <div class="uno-loader">
+            <progress></progress>
+        </div>
+
+        <div id="output">Loading...</div>
+        <button onclick="$.SetText('output', 'Hello from onClick!')">Click me</button>
+
+        <script>
+            async function handleDotnetReady() {
+                const exports = await Module.getAssemblyExports("WasmPrototype");
+                // Bind all exported functions to a global $
+                window.$ = exports.Prototype.Program;
+                console.log("Dotnet WASM ready, exports available on $");
+
+                // Optional: immediately update text
+                $.SetText("output", "Uno WASM is working!");
+            }
+        </script>
+    </body>
+</html>
