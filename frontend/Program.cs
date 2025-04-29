@@ -1,16 +1,14 @@
 using System;
-using System.Runtime.InteropServices.JavaScript;
 
 namespace SwissPension.WasmPrototype.Frontend;
 
-public partial class Program
+public static partial class Program
 {
-    [JSExport]
-    public static void SetText(string id, string text)
+    internal static void SetText(string id, string text)
     {
         try
         {
-            var el = GetElementById(id);
+            var el = Interop.GetElementById(id);
             if (el != null)
             {
                 el.SetProperty("innerText", text);
@@ -26,18 +24,12 @@ public partial class Program
             Console.WriteLine($"Error in SetText: {ex.Message}");
         }
     }
-
-    [JSImport("globalThis.document.getElementById")]
-    public static partial JSObject GetElementById(string id);
-
-    [JSImport("globalThis.handleDotnetReady")]
-    public static partial void HandleDotnetReady();
-
+    
     public static void Main()
     {
         Console.WriteLine("WASM loaded successfully.");
 
         SetText("output", "Hello from WASM-CSharp!");
-        HandleDotnetReady();
+        Interop.HandleDotnetReady();
     }
 }

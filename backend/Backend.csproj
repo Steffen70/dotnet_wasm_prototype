@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <AssemblyName>SwissPension.WasmPrototype.Backend</AssemblyName>
+        <RootNamespace>$(AssemblyName)</RootNamespace>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DisableImplicitFrameworkReferences>false</DisableImplicitFrameworkReferences>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Grpc.AspNetCore" Version="2.71.0"/>
+        <PackageReference Include="Grpc.AspNetCore.Web" Version="2.71.0"/>
+        <PackageReference Include="Google.Protobuf" Version="3.30.2"/>
+    </ItemGroup>
+
+    <Target Name="ForceClean" AfterTargets="Clean">
+        <RemoveDir Directories="$(OutDir)/../"/>
+    </Target>
+
+    <ItemGroup>
+        <Protobuf Include="../protos/*.proto" GrpcServices="Server"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="../cert/localhost.crt"/>
+        <Content Include="../cert/localhost.pem"/>
+    </ItemGroup>
+
+    <ItemDefinitionGroup>
+        <Content>
+            <Link>cert/%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemDefinitionGroup>
+
+</Project>

@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package WasmPrototype;
+
+option csharp_namespace = "SwissPension.WasmPrototype.Common";
+
+import "google/protobuf/empty.proto";
+
+service Admin {
+    // Demo Hello World
+    rpc HelloWorld(google.protobuf.Empty) returns (HelloWorldResponse);
+}
+
+message HelloWorldResponse {
+    string message = 1;
+}
+
+message User {
+    string name       = 1;
+    string department = 2;
+    string email      = 3;
+}
+
+message UserList {
+    repeated User users = 1;
+}

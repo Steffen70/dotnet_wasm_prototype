@@ -1,5 +1,7 @@
 #!/bin/bash
 
+FRONTEND_PORT=8443
+
 WATCHED_EXTENSIONS=("cs" "html" "css" "js" "json")
 EXT_PATTERN=$(IFS="|" ; echo "${WATCHED_EXTENSIONS[*]}")
 SERVER_PID=0
@@ -19,7 +21,7 @@ rebuild_and_serve() {
     ./build.sh
 
     echo "Starting server..."
-    python3 -m http.server 8080 --directory ./Publish/wwwroot &
+    python3 -m http.server $FRONTEND_PORT --directory ./Publish/wwwroot &
     SERVER_PID=$!
 }
 
