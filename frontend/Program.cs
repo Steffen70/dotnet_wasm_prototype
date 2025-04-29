@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices.JavaScript;
 
-namespace Prototype;
+namespace SwissPension.WasmPrototype.Frontend;
 
 public partial class Program
 {
@@ -36,6 +36,8 @@ public partial class Program
     public static void Main()
     {
         Console.WriteLine("WASM loaded successfully.");
+
+        SetText("output", "Hello from WASM-CSharp!");
         HandleDotnetReady();
     }
 }

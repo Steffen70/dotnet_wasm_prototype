@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <script type="text/javascript" src="%PACKAGE_GUID%/require.js"></script>
+        <script type="module" src="%PACKAGE_GUID%/uno-bootstrap.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+
+        <!-- Nunito Sans from Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet" />
+
+        <link rel="stylesheet" href="stylesheet.css" />
+
+        <title>WASM Test</title>
+    </head>
+    <body id="uno-body">
+        <!-- Required by the uno bootstraper -->
+        <div class="uno-loader">
+            <progress></progress>
+        </div>
+
+        <div class="center">
+            <img id="icon" src="assets/images/swisspension_icon.svg" alt="swisspension" />
+        </div>
+
+        <div class="text-block">
+            <h2>WASM Test</h2>
+            <p class="hello-and-ciao"><span id="output">Loading...</span> Ciao from static HTML!</p>
+            <div>
+                <div class="button" onclick="$.SetText('output', 'Hello from onClick!')">Click me</div>
+            </div>
+        </div>
+
+        <div class="text-block">
+            <h2>gRPC Test</h2>
+        </div>
+    </body>
+</html>

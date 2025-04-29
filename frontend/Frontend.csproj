@@ -1,8 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk.WebAssembly">
 
     <PropertyGroup>
+        <AssemblyName>SwissPension.WasmPrototype.Frontend</AssemblyName>
+        <RootNamespace>$(AssemblyName)</RootNamespace>
         <OutputType>Exe</OutputType>
         <TargetFramework>net9.0</TargetFramework>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
 
         <!-- JSExportAttribute and JSImportAttribute require enabled  unsafe blocks -->
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -25,10 +28,24 @@
 
         <!-- Replace and overwrite -->
         <Exec Command="pwsh -NoProfile -Command &quot;
-            \$content = Get-Content 'index.html';
+            \$content = Get-Content 'src/index.html';
             \$fixed = \$content -replace '%PACKAGE_GUID%', '$(UnoPackageGuid)';
             Set-Content '$(PublishDir)wwwroot/index.html' -Value \$fixed
         &quot;" />
     </Target>
+
+    <ItemGroup>
+        <Content Include="src/*" Exclude="src/index.html">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+            <Link>wwwroot/%(Filename)%(Extension)</Link>
+        </Content>
+
+        <Content Include="assets/**/*">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+            <Link>wwwroot/assets/%(RecursiveDir)%(Filename)%(Extension)</Link>
+        </Content>
+    </ItemGroup>
 
 </Project>

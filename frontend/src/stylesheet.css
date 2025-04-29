@@ -1,0 +1,106 @@
+:root {
+    --scroll-max-width: 960px;
+    --mobile-padding-x: 40px;
+    --scroll-padding-x: max(var(--mobile-padding-x), calc(100vw / 2 - var(--scroll-max-width)));
+
+    --accent-color: #e42312;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+    :root {
+        --mobile-padding-x: 15px;
+    }
+}
+
+* {
+    font-family: "Nunito Sans", sans-serif;
+    color: #505658;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.uno-loader {
+    display: none;
+}
+
+#icon {
+    max-width: 80px;
+    margin: 25px 0;
+}
+
+.text-block {
+    padding: 20px 0;
+
+    &:nth-of-type(odd) {
+        background-color: #f5f5f6;
+    }
+
+    > * {
+        width: calc(100% - var(--scroll-padding-x) * 2);
+        padding: 0px var(--scroll-padding-x);
+    }
+
+    h2 {
+        color: var(--accent-color);
+    }
+
+    .hello-and-ciao {
+        white-space: nowrap;
+
+        #output {
+            font-weight: bold;
+        }
+    }
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    --button-margin-x: 15px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    z-index: 10;
+    color: #2f343b;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.8rem;
+    padding-top: 2px;
+    letter-spacing: 1px;
+    width: fit-content;
+    margin: 30px var(--button-margin-x);
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        height: 200%;
+        width: calc(100% + var(--button-margin-x) * 2);
+        transform: translate(calc(var(--button-margin-x) * -1), -25%);
+        top: 0;
+        left: 0;
+        background-color: white;
+        z-index: -1;
+    }
+
+    &::after {
+        background-color: transparent;
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--accent-color);
+        box-sizing: border-box;
+    }
+
+    &:hover {
+        color: var(--accent-color);
+    }
+}
