@@ -68,10 +68,16 @@
             <Link>wwwroot/%(Filename)%(Extension)</Link>
         </Content>
 
-        <Content Include="assets/**/*">
+        <Content Include="assets/**/*" Exclude="assets/images/favicon.ico">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <CopyToPublishDirectory>Always</CopyToPublishDirectory>
             <Link>wwwroot/assets/%(RecursiveDir)%(Filename)%(Extension)</Link>
+        </Content>
+
+        <Content Include="assets/images/favicon.ico">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+            <Link>wwwroot/%(Filename)%(Extension)</Link>
         </Content>
     </ItemGroup>
 
