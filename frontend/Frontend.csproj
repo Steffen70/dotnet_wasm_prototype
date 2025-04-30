@@ -9,7 +9,7 @@
 
         <!-- JSExportAttribute and JSImportAttribute require enabled  unsafe blocks -->
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <NoWarn>$(NoWarn);CA1416</NoWarn>
+        <NoWarn>$(NoWarn);CA1416;CS4014</NoWarn>
 
         <EnableDefaultCompressedItems>false</EnableDefaultCompressedItems>
     </PropertyGroup>
@@ -26,13 +26,40 @@
 
         <Message Importance="high" Text="Replacing %PACKAGE_GUID% with $(UnoPackageGuid) inside index.html" />
 
-        <!-- Replace and overwrite -->
+        <!-- Inject Uno Bootstraper package GUID into index.html -->
         <Exec Command="pwsh -NoProfile -Command &quot;
             \$content = Get-Content 'src/index.html';
             \$fixed = \$content -replace '%PACKAGE_GUID%', '$(UnoPackageGuid)';
             Set-Content '$(PublishDir)wwwroot/index.html' -Value \$fixed
         &quot;" />
     </Target>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.4"/>
+        <PackageReference Include="Google.Protobuf" Version="3.30.2"/>
+        <PackageReference Include="Grpc.Net.Client" Version="2.71.0"/>
+        <PackageReference Include="Grpc.Net.Client.Web" Version="2.71.0"/>
+        <PackageReference Include="Grpc.Tools" Version="2.71.0" PrivateAssets="All"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Protobuf Include="../protos/*.proto" GrpcServices="Client"/>
+    </ItemGroup>
+
+    <PropertyGroup>
+        <!-- fallback value -->
+        <ApiUrl>https://localhost:8444/</ApiUrl>
+    </PropertyGroup>
+
+    <!-- Generate BuildConstants.cs before building -->
+    <Target Name="GenerateBuildConstants" BeforeTargets="BeforeBuild">
+        <Exec Command="pwsh -NoProfile -Command &quot;(Get-Content 'BuildConstants.template.cs') -replace '%API_URL%', '$(ApiUrl)' | Set-Content 'BuildConstants.cs'&quot;" />
+    </Target>
+
+    <!-- Exclude template files from the build -->
+    <ItemGroup>
+        <Compile Remove="*.template.cs" />
+    </ItemGroup>
 
     <ItemGroup>
         <Content Include="src/*" Exclude="src/index.html">

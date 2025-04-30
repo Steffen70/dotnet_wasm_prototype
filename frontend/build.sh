@@ -4,4 +4,5 @@
 rm -rf ./Publish
 
 # Publish the project to the output directory
-dotnet publish -c Release -o ./Publish -v:d
+export API_URL="https://localhost:8444/"
+dotnet publish -c Release -o ./Publish -v:d -p:ApiUrl=$API_URL

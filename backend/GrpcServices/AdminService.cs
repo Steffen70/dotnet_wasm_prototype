@@ -9,6 +9,6 @@ public class AdminService : Admin.AdminBase
 {
     public override Task<HelloWorldResponse> HelloWorld(Empty request, ServerCallContext context)
     {
-        return Task.FromResult(new HelloWorldResponse { Message = "Hello World!" });
+        return Task.FromResult(new HelloWorldResponse { Message = "Hello over gRPC!" });
     }
 }

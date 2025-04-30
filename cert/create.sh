@@ -2,7 +2,7 @@
 set -e
 
 # Clean up: delete all files except *.md and *.conf
-find . -maxdepth 1 -type f ! \( -name "*.md" -o -name "*.conf" -o -name "create.sh" -o -name ".gitignore" \) -exec rm -f {} +
+find . -maxdepth 1 -type f ! \( -name "*.md" -o -name "*.conf" -o -name "create.sh" -o -name ".gitignore" -o -name "api.crt" \) -exec rm -f {} +
 
 echo "[1/6] Generating Root CA key (root_ca.key)..."
 openssl genrsa -out root_ca.key 2048

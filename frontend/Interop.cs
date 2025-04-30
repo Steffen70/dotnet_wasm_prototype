@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices.JavaScript;
+using Microsoft.Extensions.Logging;
 
 namespace SwissPension.WasmPrototype.Frontend;
 
@@ -12,4 +13,8 @@ internal static partial class Interop
     
     [JSExport]
     internal static void SetText(string id, string text) => Program.SetText(id, text);
+    
+    // fire-and-forget
+    [JSExport]
+    internal static void SayHelloWorld() => Program.CallAndRespondAsync(); 
 }
