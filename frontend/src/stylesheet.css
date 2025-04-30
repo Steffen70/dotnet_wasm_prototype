@@ -1,9 +1,10 @@
 :root {
     --scroll-max-width: 960px;
     --mobile-padding-x: 40px;
-    --scroll-padding-x: max(var(--mobile-padding-x), calc(100vw / 2 - var(--scroll-max-width)));
+    --scroll-margin-x: max(var(--mobile-padding-x), calc(100vw / 2 - var(--scroll-max-width)));
 
     --accent-color: #e42312;
+    --tertiary-color: #f5f5f6;
 }
 
 /* Mobile styles */
@@ -38,12 +39,13 @@ body {
     padding: 20px 0;
 
     &:nth-of-type(odd) {
-        background-color: #f5f5f6;
+        background-color: var(--tertiary-color);
     }
 
     > * {
-        width: calc(100% - var(--scroll-padding-x) * 2);
-        padding: 0px var(--scroll-padding-x);
+        width: calc(100% - var(--scroll-margin-x) * 2);
+        margin-left: var(--scroll-margin-x);
+        margin-right: var(--scroll-margin-x);
     }
 
     h2 {
@@ -61,7 +63,7 @@ body {
 
 .center {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .button {
@@ -102,5 +104,22 @@ body {
 
     &:hover {
         color: var(--accent-color);
+    }
+}
+
+.user-table {
+    border-collapse: collapse;
+    font-size: 0.9rem;
+
+    th,
+    td {
+        border: 1px solid #ccc;
+        padding: 8px 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: var(--tertiary-color);
+        font-weight: bold;
     }
 }

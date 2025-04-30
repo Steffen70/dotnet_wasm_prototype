@@ -11,4 +11,26 @@ public class AdminService : Admin.AdminBase
     {
         return Task.FromResult(new HelloWorldResponse { Message = "Hello over gRPC!" });
     }
+    
+    public async IAsyncEnumerable<User> GenerateUsers()
+    {
+        for (var i = 0; i < 20; i++)
+        {
+            yield return new User
+            {
+                Name = $"User {i}",
+                Department = $"Dept {i % 5}",
+                Email = $"user{i}@swisspension.net"
+            };
+            await Task.Yield();
+        }
+    }
+
+    public override async Task FetchUsers(Empty request, IServerStreamWriter<User> responseStream, ServerCallContext context)
+    {
+        await foreach (var user in GenerateUsers())
+        {
+            await responseStream.WriteAsync(user);
+        }
+    }
 }

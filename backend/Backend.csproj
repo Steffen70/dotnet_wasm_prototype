@@ -3,7 +3,7 @@
     <PropertyGroup>
         <AssemblyName>SwissPension.WasmPrototype.Backend</AssemblyName>
         <RootNamespace>$(AssemblyName)</RootNamespace>
-        <TargetFramework>net9.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <DisableImplicitFrameworkReferences>false</DisableImplicitFrameworkReferences>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>

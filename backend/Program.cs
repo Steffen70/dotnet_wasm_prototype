@@ -22,7 +22,7 @@ public class Program
         builder.Services.AddLogging(loggingBuilder =>
         {
             loggingBuilder.AddConsole();
-            loggingBuilder.AddFilter("Microsoft.AspNetCore", LogLevel.Warning);
+            // loggingBuilder.AddFilter("Microsoft.AspNetCore", LogLevel.Warning);
         });
 
 #if RELEASE

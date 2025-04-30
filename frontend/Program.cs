@@ -1,6 +1,8 @@
 using System;
 using System.Net.Http;
+using System.Runtime.InteropServices.JavaScript;
 using System.Threading.Tasks;
+using Grpc.Core;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 using Microsoft.Extensions.Logging;
@@ -36,7 +38,7 @@ public partial class Program
         }
     }
     
-    internal static async Task CallAndRespondAsync()
+    internal static async Task HelloWorldAsync()
     {
         var response = await AdminClient.HelloWorldAsync(new());
         var message = response.Message;
@@ -44,6 +46,53 @@ public partial class Program
     
         // Set JS DOM text or call JS function with result
         SetText("output", message);
+    }
+
+    internal static async Task FetchUsersAsync()
+    {
+        Logger.LogInformation("Fetching users...");
+
+        var placeholder = Interop.GetElementById("place-holder");
+        if (placeholder is not null)
+        {
+            // Clean up old placeholder
+            Interop.RemoveElement(placeholder); 
+        }
+
+        var tbody = Interop.GetElementById("user-table-body");
+        if (tbody is null)
+        {
+            Logger.LogError("Missing tbody with id 'user-table-body'");
+            return;
+        }
+
+        try
+        {
+            using var call = AdminClient.FetchUsers(new());
+
+            await foreach (var user in call.ResponseStream.ReadAllAsync())
+            {
+                var tr = Interop.CreateElement("tr");
+
+                AppendTextCell(tr, user.Name);
+                AppendTextCell(tr, user.Department);
+                AppendTextCell(tr, user.Email);
+
+                Interop.AppendChild(tbody, tr);
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "FetchUsers failed.");
+        }
+    }
+
+    private static void AppendTextCell(JSObject tr, string content)
+    {
+        var td = Interop.CreateElement("td");
+        var text = Interop.CreateTextNode(content);
+        Interop.AppendChild(td, text);
+        Interop.AppendChild(tr, td);
     }
 
     public static void Main()

@@ -9,6 +9,8 @@ import "google/protobuf/empty.proto";
 service Admin {
     // Demo Hello World
     rpc HelloWorld(google.protobuf.Empty) returns (HelloWorldResponse);
+    // Streamed FetchUsers endpoint
+    rpc FetchUsers(google.protobuf.Empty) returns (stream User);
 }
 
 message HelloWorldResponse {
@@ -19,8 +21,4 @@ message User {
     string name       = 1;
     string department = 2;
     string email      = 3;
-}
-
-message UserList {
-    repeated User users = 1;
 }

@@ -4,18 +4,23 @@
         <AssemblyName>SwissPension.WasmPrototype.Frontend</AssemblyName>
         <RootNamespace>$(AssemblyName)</RootNamespace>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net9.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
 
         <!-- JSExportAttribute and JSImportAttribute require enabled  unsafe blocks -->
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <NoWarn>$(NoWarn);CA1416;CS4014</NoWarn>
 
+        <!-- Enable Multithreading in WasmShell -->
+        <WasmShellEnableThreads>true</WasmShellEnableThreads>
+        <WasmShellPThreadsPoolSize>4</WasmShellPThreadsPoolSize>
+
+        <IsBrowserWasmProject>false</IsBrowserWasmProject>
         <EnableDefaultCompressedItems>false</EnableDefaultCompressedItems>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Uno.Wasm.Bootstrap" Version="9.0.*" />
+        <PackageReference Include="Uno.Wasm.Bootstrap" Version="8.0.*" />
     </ItemGroup>
 
     <Target Name="PatchUnoIndexHtml" AfterTargets="Publish">
@@ -35,7 +40,7 @@
     </Target>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.4"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.*"/>
         <PackageReference Include="Google.Protobuf" Version="3.30.2"/>
         <PackageReference Include="Grpc.Net.Client" Version="2.71.0"/>
         <PackageReference Include="Grpc.Net.Client.Web" Version="2.71.0"/>
