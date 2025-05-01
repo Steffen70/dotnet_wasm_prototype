@@ -25,6 +25,9 @@ dotnet workload install wasm-tools
 # Install static file server (used by watch.sh to serve the frontend)
 dotnet tool install --global dotnet-serve
 
+# Install Caddy (a lightweight reverse proxy to serve the frontend over HTTPS)
+sudo apt install caddy
+
 # Install inotify-tools (used by watch.sh to detect file changes)
 sudo apt install inotify-tools
 

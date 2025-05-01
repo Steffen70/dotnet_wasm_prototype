@@ -1,0 +1,17 @@
+{
+	admin off
+	auto_https off
+}
+
+https://localhost:8443 {
+	tls ../cert/localhost.crt ../cert/localhost.key
+	reverse_proxy localhost:8442 {
+		header_up Host {host}
+		header_up X-Real-IP {remote}
+		header_up X-Forwarded-For {remote}
+		header_up X-Forwarded-Proto {scheme}
+		header_down Access-Control-Allow-Origin "*"
+		header_down Cross-Origin-Embedder-Policy "require-corp"
+		header_down Cross-Origin-Opener-Policy "same-origin"
+	}
+}

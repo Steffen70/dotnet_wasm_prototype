@@ -11,7 +11,7 @@ using SwissPension.WasmPrototype.Frontend.Helpers;
 
 namespace SwissPension.WasmPrototype.Frontend;
 
-public partial class Program
+public class Program
 {
     internal static Admin.AdminClient AdminClient { get; private set; }
 
@@ -123,10 +123,8 @@ public partial class Program
         }
         catch (Exception ex)
         {
-            var errorMessage = $"Error in Main: {ex.Message}";
-#if DEBUG            
-            errorMessage += " stack trace: {ex.StackTrace}";
-#endif
+            var errorMessage = $"Error in Main: {ex.Message} stack trace: {ex.StackTrace}";
+
             if (Logger == null)
             {
                 Console.WriteLine(errorMessage);

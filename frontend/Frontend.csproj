@@ -37,6 +37,15 @@
             \$fixed = \$content -replace '%PACKAGE_GUID%', '$(UnoPackageGuid)';
             Set-Content '$(PublishDir)wwwroot/index.html' -Value \$fixed
         &quot;" />
+
+        <!-- Copy ICU file to expected location/name -->
+        <ItemGroup>
+            <IcuSource Include='$(UnoPackageDir)/managed/icudt_EFIGS.dat' />
+            <!-- <IcuSourceBr Include='$(UnoPackageDir)/managed/icudt_EFIGS.dat.br' /> -->
+        </ItemGroup>
+
+        <Copy SourceFiles="@(IcuSource)" DestinationFiles="$(UnoPackageDir)/managed/icudt.dat" SkipUnchangedFiles="true" />
+        <!-- <Copy SourceFiles="@(IcuSourceBr)" DestinationFiles="$(UnoPackageDir)/managed/icudt.dat.br" SkipUnchangedFiles="true" /> -->
     </Target>
 
     <ItemGroup>
