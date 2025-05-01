@@ -57,7 +57,7 @@
     </PropertyGroup>
 
     <!-- Generate BuildConstants.cs before building -->
-    <Target Name="GenerateBuildConstants" BeforeTargets="BeforeBuild">
+    <Target Name="GenerateBuildConstants" BeforeTargets="PrepareForBuild">
         <Exec Command="pwsh -NoProfile -Command &quot;(Get-Content 'BuildConstants.template.cs') -replace '%API_URL%', '$(ApiUrl)' | Set-Content 'BuildConstants.cs'&quot;" />
     </Target>
 
