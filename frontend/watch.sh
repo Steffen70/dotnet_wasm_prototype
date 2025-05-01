@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FRONTEND_PORT=8442
+FRONTEND_PORT=8444
 WATCHED_EXTENSIONS=("cs" "html" "css" "js" "json")
 EXT_PATTERN=$(IFS="|" ; echo "${WATCHED_EXTENSIONS[*]}")
 SERVER_PID=0

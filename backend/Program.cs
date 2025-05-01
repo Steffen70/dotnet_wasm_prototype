@@ -30,7 +30,7 @@ public class Program
         var apiPort = int.Parse(Environment.GetEnvironmentVariable(ApiPortEnvironmentVariable) ?? throw new InvalidOperationException($"{ApiPortEnvironmentVariable} environment variable not set"));
 #elif DEBUG
         // Don't require the API_PORT environment variable in DEBUG mode
-        const int apiPort = 8444;
+        const int apiPort = 8445;
 #endif
 
         // Configure the Kestrel server with the certificate and the API port

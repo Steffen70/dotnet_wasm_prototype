@@ -3,13 +3,21 @@
 	auto_https off
 }
 
-https://localhost:8443 {
+:8443 {
 	tls ../cert/localhost.crt ../cert/localhost.key
-	reverse_proxy localhost:8442 {
+
+	handle /WasmPrototype.Admin/* {
+		reverse_proxy https://localhost:8445 {
+			transport http {
+				tls_insecure_skip_verify
+			}
+			header_up Host localhost
+		}
+	}
+
+	# Default frontend reverse proxy
+	reverse_proxy localhost:8444 {
 		header_up Host {host}
-		header_up X-Real-IP {remote}
-		header_up X-Forwarded-For {remote}
-		header_up X-Forwarded-Proto {scheme}
 		header_down Access-Control-Allow-Origin "*"
 		header_down Cross-Origin-Embedder-Policy "require-corp"
 		header_down Cross-Origin-Opener-Policy "same-origin"
