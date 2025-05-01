@@ -48,10 +48,12 @@ cleanup() {
 
     echo "Cleaning up..."
     if [[ $SERVER_PID -ne 0 ]]; then
+        echo "Killing server (PID $SERVER_PID)..."
         kill "$SERVER_PID" 2>/dev/null
         wait "$SERVER_PID" 2>/dev/null
     fi
     if [[ $CADDY_PID -ne 0 ]]; then
+        echo "Killing reverse proxy (PID $CADDY_PID)..."
         kill "$CADDY_PID" 2>/dev/null
         wait "$CADDY_PID" 2>/dev/null
     fi
@@ -62,8 +64,9 @@ cleanup() {
 trap cleanup SIGINT SIGTERM EXIT
 
 # Start Caddy and save its PID
-caddy run --config Caddyfile --adapter caddyfile >/dev/null 2>&1 &
+setsid caddy run --config Caddyfile --adapter caddyfile --environ >/dev/null 2>&1 &
 CADDY_PID=$!
+echo "Started reverse proxy (PID $CADDY_PID)"
 
 rebuild_and_serve
 echo "Watching for changes in git-tracked *.{${EXT_PATTERN}} files..."

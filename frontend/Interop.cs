@@ -14,10 +14,10 @@ internal static partial class Interop
     [JSImport("globalThis.document.createTextNode")]
     internal static partial JSObject CreateTextNode(string text);
 
-    [JSImport("globalThis.Node.appendChild")]
+    [JSImport("globalThis.Node.prototype.appendChild.call")]
     internal static partial void AppendChild(JSObject parent, JSObject child);
 
-    [JSImport("globalThis.Element.remove")]
+    [JSImport("globalThis.HTMLElement.prototype.remove.call")]
     internal static partial void RemoveElement(JSObject element);
 
     [JSImport("globalThis.handleDotnetReady")]

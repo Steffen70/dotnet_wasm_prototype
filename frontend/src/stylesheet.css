@@ -107,7 +107,7 @@ body {
     }
 }
 
-.user-table {
+#user-table {
     border-collapse: collapse;
     font-size: 0.9rem;
 

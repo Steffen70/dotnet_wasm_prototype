@@ -37,13 +37,12 @@ public class Program
             Logger.LogInformation($"Error in SetText: {ex.Message}");
         }
     }
-    
+
     internal static async Task HelloWorldAsync()
     {
         var response = await AdminClient.HelloWorldAsync(new());
         var message = response.Message;
         Logger.LogInformation($"Received response from server: {message}");
-    
         // Set JS DOM text or call JS function with result
         SetText("output", message);
     }
@@ -56,7 +55,7 @@ public class Program
         if (placeholder is not null)
         {
             // Clean up old placeholder
-            Interop.RemoveElement(placeholder); 
+            Interop.RemoveElement(placeholder);
         }
 
         var tbody = Interop.GetElementById("user-table-body");
@@ -99,10 +98,7 @@ public class Program
     {
         try
         {
-            var loggerFactory = LoggerFactory.Create(builder =>
-            {
-                builder.AddProvider(new WasmLoggerProvider());
-            });
+            var loggerFactory = LoggerFactory.Create(builder => { builder.AddProvider(new WasmLoggerProvider()); });
 
             Logger = loggerFactory.CreateLogger(typeof(Program).Namespace!);
 

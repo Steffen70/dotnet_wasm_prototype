@@ -64,4 +64,4 @@ This watches tracked source files (`*.cs`, `*.html`, `*.css`, `*.js`, `*.json`) 
 
 ## Backend
 
-Open the solution in JetBrains Rider and run `WasmPrototype.sln`.
+Open the `WasmPrototype.sln` solution in JetBrains Rider and run the `Backend.csproj` project.
