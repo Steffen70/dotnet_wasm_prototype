@@ -38,7 +38,7 @@ body {
 .text-block {
     padding: 20px 0;
 
-    &:nth-of-type(odd) {
+    &.dark {
         background-color: var(--tertiary-color);
     }
 

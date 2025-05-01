@@ -9,3 +9,6 @@ dotnet publish -c Release -o ./Publish -p:ApiUrl=$API_URL -p:EmitSourceMapping=t
 
 # Strip sourceMappingURL comment to prevent browser from requesting .js.map
 find ./Publish -type f -name "*.js" -exec sed -i '/sourceMappingURL/d' {} +
+
+# Remove the entire runtimeOptions block to avoid readonly warnings from jiterpreter flags
+find ./Publish/wwwroot/package_* -name "mono-config.json" -exec sed -i '/"runtimeOptions": \[/,/\],/d' {} \;
