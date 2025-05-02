@@ -19,7 +19,8 @@ rebuild_and_serve() {
     fi
 
     echo "Rebuilding project..."
-    ./build.sh
+    dotnet clean >/dev/null 2>&1
+    dotnet publish -c Release -o ./Publish -p:EmitSourceMapping=true -p:EmitDebugInformation=true
 
     # Create a named pipe for cleaner output and easier control
     rm -f "$PIPE_FILE"

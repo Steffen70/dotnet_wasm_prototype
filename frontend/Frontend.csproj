@@ -21,9 +21,30 @@
 
     <ItemGroup>
         <PackageReference Include="Uno.Wasm.Bootstrap" Version="8.0.*" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.*"/>
+        <PackageReference Include="Google.Protobuf" Version="3.30.2"/>
+        <PackageReference Include="Grpc.Net.Client" Version="2.71.0"/>
+        <PackageReference Include="Grpc.Net.Client.Web" Version="2.71.0"/>
+        <PackageReference Include="Grpc.Tools" Version="2.71.0" PrivateAssets="All"/>
     </ItemGroup>
 
-    <Target Name="PatchUnoIndexHtml" AfterTargets="Publish">
+    <PropertyGroup>
+        <!-- fallback value, can be overriden with -p:ApiUrl=$API_URL -->
+        <ApiUrl>https://localhost:8443/</ApiUrl>
+    </PropertyGroup>
+
+    <!-- Generate BuildConstants.cs before building -->
+    <Target Name="GenerateBuildConstants" BeforeTargets="PrepareForBuild">
+        <Exec Command="pwsh -NoProfile -Command &quot;(Get-Content 'BuildConstants.template.cs') -replace '%API_URL%', '$(ApiUrl)' | Set-Content 'BuildConstants.cs'&quot;" />
+    </Target>
+
+    <Target Name="ForceClean" AfterTargets="Clean">
+        <RemoveDir Directories="$(MSBuildProjectDirectory)/bin" />
+        <!-- Remove entire ./Publish directory in project root -->
+        <RemoveDir Directories="$(MSBuildProjectDirectory)/Publish" />
+    </Target>
+
+    <Target Name="PatchUnoArtifacts" AfterTargets="Publish">
         <PropertyGroup>
             <UnoPackageDir>$([System.IO.Directory]::GetDirectories('$(PublishDir)wwwroot', 'package_*')[0])</UnoPackageDir>
             <UnoPackageGuid>$([System.IO.Path]::GetFileName('$(UnoPackageDir)'))</UnoPackageGuid>
@@ -38,6 +59,27 @@
             Set-Content '$(PublishDir)wwwroot/index.html' -Value \$fixed
         &quot;" />
 
+        <!-- Remove //# sourceMappingURL lines from JS files -->
+        <Exec Command="pwsh -NoProfile -Command &quot;
+            Get-ChildItem -Recurse -Filter '*.js' '$(PublishDir)' |
+            ForEach-Object {
+                (Get-Content \$_) | Where-Object { \$_ -notmatch 'sourceMappingURL' } | Set-Content \$_
+            }
+        &quot;" />
+
+        <!-- Remove 'runtimeOptions' block from mono-config.json -->
+        <Exec Command="pwsh -NoProfile -Command &quot;
+            \$configPath = Join-Path '$(UnoPackageDir)' 'mono-config.json';
+            \$lines = Get-Content \$configPath;
+            \$inBlock = \$false;
+            \$filtered = foreach (\$line in \$lines) {
+                if (\$line -match '^\s*\&quot;runtimeOptions\&quot;\s*:\s*\[') { \$inBlock = \$true; continue }
+                if (\$inBlock -and \$line -match '\],?') { \$inBlock = \$false; continue }
+                if (-not \$inBlock) { \$line }
+            };
+            \$filtered | Set-Content \$configPath
+        &quot;" />
+
         <!-- Copy ICU file to expected location/name -->
         <ItemGroup>
             <IcuSource Include='$(UnoPackageDir)/managed/icudt_EFIGS.dat' />
@@ -48,31 +90,13 @@
         <!-- <Copy SourceFiles="@(IcuSourceBr)" DestinationFiles="$(UnoPackageDir)/managed/icudt.dat.br" SkipUnchangedFiles="true" /> -->
     </Target>
 
+    <!-- Exclude template files from the build -->
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.*"/>
-        <PackageReference Include="Google.Protobuf" Version="3.30.2"/>
-        <PackageReference Include="Grpc.Net.Client" Version="2.71.0"/>
-        <PackageReference Include="Grpc.Net.Client.Web" Version="2.71.0"/>
-        <PackageReference Include="Grpc.Tools" Version="2.71.0" PrivateAssets="All"/>
+        <Compile Remove="*.template.cs" />
     </ItemGroup>
 
     <ItemGroup>
         <Protobuf Include="../protos/*.proto" GrpcServices="Client"/>
-    </ItemGroup>
-
-    <PropertyGroup>
-        <!-- fallback value -->
-        <ApiUrl>https://localhost:8443/</ApiUrl>
-    </PropertyGroup>
-
-    <!-- Generate BuildConstants.cs before building -->
-    <Target Name="GenerateBuildConstants" BeforeTargets="PrepareForBuild">
-        <Exec Command="pwsh -NoProfile -Command &quot;(Get-Content 'BuildConstants.template.cs') -replace '%API_URL%', '$(ApiUrl)' | Set-Content 'BuildConstants.cs'&quot;" />
-    </Target>
-
-    <!-- Exclude template files from the build -->
-    <ItemGroup>
-        <Compile Remove="*.template.cs" />
     </ItemGroup>
 
     <ItemGroup>

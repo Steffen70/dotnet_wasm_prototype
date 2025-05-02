@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <Target Name="ForceClean" AfterTargets="Clean">
-        <RemoveDir Directories="$(OutDir)/../"/>
+        <RemoveDir Directories="$(MSBuildProjectDirectory)/bin" />
     </Target>
 
     <ItemGroup>
@@ -24,15 +24,14 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="../cert/localhost.crt"/>
-        <Content Include="../cert/localhost.pem"/>
-    </ItemGroup>
-
-    <ItemDefinitionGroup>
-        <Content>
-            <Link>cert/%(Filename)%(Extension)</Link>
+        <Content Include="../cert/localhost.crt">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>cert/localhost.crt</Link>
         </Content>
-    </ItemDefinitionGroup>
+        <Content Include="../cert/localhost.pem">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>cert/localhost.pem</Link>
+        </Content>
+    </ItemGroup>
 
 </Project>
