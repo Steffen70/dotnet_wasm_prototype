@@ -1,6 +1,5 @@
 using System;
 using System.Net.Http;
-using System.Runtime.InteropServices.JavaScript;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Grpc.Net.Client;
@@ -51,47 +50,20 @@ public class Program
     {
         Logger.LogInformation("Fetching users...");
 
-        var placeholder = Interop.GetElementById("place-holder");
-        if (placeholder is not null)
-        {
-            // Clean up old placeholder
-            Interop.RemoveElement(placeholder);
-        }
-
-        var tbody = Interop.GetElementById("user-table-body");
-        if (tbody is null)
-        {
-            Logger.LogError("Missing tbody with id 'user-table-body'");
-            return;
-        }
-
         try
         {
             using var call = AdminClient.FetchUsers(new());
 
             await foreach (var user in call.ResponseStream.ReadAllAsync())
             {
-                var tr = Interop.CreateElement("tr");
-
-                AppendTextCell(tr, user.Name);
-                AppendTextCell(tr, user.Department);
-                AppendTextCell(tr, user.Email);
-
-                Interop.AppendChild(tbody, tr);
+                // Convert gRPC user to JSObject and add to grid
+                Interop.AddRecordToGrid(user.ToJsObject());
             }
         }
         catch (Exception ex)
         {
             Logger.LogError(ex, "FetchUsers failed.");
         }
-    }
-
-    private static void AppendTextCell(JSObject tr, string content)
-    {
-        var td = Interop.CreateElement("td");
-        var text = Interop.CreateTextNode(content);
-        Interop.AppendChild(td, text);
-        Interop.AppendChild(tr, td);
     }
 
     public static void Main()

@@ -1,5 +1,4 @@
 using System.Runtime.InteropServices.JavaScript;
-using Microsoft.Extensions.Logging;
 
 namespace SwissPension.WasmPrototype.Frontend;
 
@@ -22,6 +21,12 @@ internal static partial class Interop
 
     [JSImport("globalThis.handleDotnetReady")]
     internal static partial void HandleDotnetReady();
+
+    [JSImport("globalThis.createPlainJsObject")]
+    internal static partial JSObject CreatePlainJsObject();
+
+    [JSImport("globalThis.addRecordToGrid")]
+    internal static partial void AddRecordToGrid(JSObject record);
     
     [JSExport]
     internal static void SetText(string id, string text) => Program.SetText(id, text);

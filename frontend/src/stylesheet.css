@@ -106,20 +106,3 @@ body {
         color: var(--accent-color);
     }
 }
-
-#user-table {
-    border-collapse: collapse;
-    font-size: 0.9rem;
-
-    th,
-    td {
-        border: 1px solid #ccc;
-        padding: 8px 12px;
-        text-align: left;
-    }
-
-    th {
-        background-color: var(--tertiary-color);
-        font-weight: bold;
-    }
-}

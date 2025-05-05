@@ -14,6 +14,10 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet" />
 
+        <!-- Syncfusion styles and JavaScript -->
+        <link href="swisspension_fluent2.css" rel="stylesheet" crossorigin />
+        <script src="https://cdn.syncfusion.com/ej2/29.1.40/dist/ej2.min.js" crossorigin></script>
+
         <link rel="stylesheet" href="stylesheet.css" />
 
         <title>WASM Test</title>
@@ -44,22 +48,9 @@
                 <div class="button" onclick="$.FetchUsers()">Fetch Users</div>
             </div>
 
-            <table id="user-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Department</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody id="user-table-body">
-                    <tr id="place-holder">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="user-grid"></div>
         </div>
+
+        <script type="text/javascript" src="user-grid.js"></script>
     </body>
 </html>
