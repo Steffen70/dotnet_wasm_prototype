@@ -3,6 +3,11 @@ obj/
 bin/
 Publish/
 
+# GitHub
+.github
+
 # IDE files
 .idea/
-*.DotSettings.user
+.vs/
+**/Properties/launchSettings.json
+*.user

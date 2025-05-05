@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net8.0-windows7.0": {
+      "Syncfusion.SfDataGrid.WinForms": {
+        "type": "Direct",
+        "requested": "[29.1.40, )",
+        "resolved": "29.1.40",
+        "contentHash": "6AH81U3IYiPsjO8fqgdqsmttZNMbV8NBYarNE8E3DzswRBO+skM2eybVG0v0tvDXKk3Sm+0KBCFXpIplVWzFcA==",
+        "dependencies": {
+          "Syncfusion.Core.WinForms": "29.1.40",
+          "Syncfusion.Data.WinForms": "29.1.40",
+          "Syncfusion.GridCommon.WinForms": "29.1.40",
+          "Syncfusion.Licensing": "29.1.40",
+          "Syncfusion.SfInput.WinForms": "29.1.40",
+          "Syncfusion.SfListView.WinForms": "29.1.40",
+          "Syncfusion.Shared.Base": "29.1.40"
+        }
+      },
+      "Google.Protobuf": {
+        "type": "Transitive",
+        "resolved": "3.30.2",
+        "contentHash": "Y2aOVLIt75yeeEWigg9V9YnjsEm53sADtLGq0gLhwaXpk3iu8tYSoauolyhenagA2sWno2TQ2WujI0HQd6s1Vw=="
+      },
+      "Grpc.Core.Api": {
+        "type": "Transitive",
+        "resolved": "2.71.0",
+        "contentHash": "QquqUC37yxsDzd1QaDRsH2+uuznWPTS8CVE2Yzwl3CvU4geTNkolQXoVN812M2IwT6zpv3jsZRc9ExJFNFslTg=="
+      },
+      "Grpc.Net.Client": {
+        "type": "Transitive",
+        "resolved": "2.71.0",
+        "contentHash": "U1vr20r5ngoT9nlb7wejF28EKN+taMhJsV9XtK9MkiepTZwnKxxiarriiMfCHuDAfPUm9XUjFMn/RIuJ4YY61w==",
+        "dependencies": {
+          "Grpc.Net.Common": "2.71.0",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.0"
+        }
+      },
+      "Grpc.Net.Client.Web": {
+        "type": "Transitive",
+        "resolved": "2.71.0",
+        "contentHash": "I+S8YkAhSwXyg2fwyHC4Bhf6QR1XFTzqsMPr6KsgsI23r/J87zLUuhv1Y93nt2Vl6b3j0mZlhknmN4fMnfvGdw=="
+      },
+      "Grpc.Net.Common": {
+        "type": "Transitive",
+        "resolved": "2.71.0",
+        "contentHash": "v0c8R97TwRYwNXlC8GyRXwYTCNufpDfUtj9la+wUrZFzVWkFJuNAltU+c0yI3zu0jl54k7en6u2WKgZgd57r2Q==",
+        "dependencies": {
+          "Grpc.Core.Api": "2.71.0"
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "/HggWBbTwy8TgebGSX5DBZ24ndhzi93sHUBDvP1IxbZD7FDokYzdAr6+vbWGjw2XAfR2EJ1sfKUotpjHnFWPxA=="
+      },
+      "Microsoft.WinForms.Designer.SDK": {
+        "type": "Transitive",
+        "resolved": "1.6.0",
+        "contentHash": "BDIY84GbvQ4ensnD1zuZUmWIypl2muqUm4SM9qZ48OmaN8G5dmos38Dt35aEzMy0sN2Ci6UaJPiY1gwmw5eo7A==",
+        "dependencies": {
+          "System.CodeDom": "4.6.0",
+          "System.Composition": "6.0.0"
+        }
+      },
+      "Syncfusion.Core.WinForms": {
+        "type": "Transitive",
+        "resolved": "29.1.40",
+        "contentHash": "XiO9Gp4eRhTEu/pOs7FkibJ0mQm9TISSZE1FBGl3Hl68IPUbnUgJhZR9ZMS395/PFAxFMKOePKntLm8Jny56bw==",
+        "dependencies": {
+          "Microsoft.WinForms.Designer.SDK": "1.6.0",
+          "Syncfusion.Licensing": "29.1.40",
+          "Syncfusion.Shared.Base": "29.1.40"
+        }
+      },
+      "Syncfusion.Data.WinForms": {
+        "type": "Transitive",
+        "resolved": "29.1.40",
+        "contentHash": "d6yWn4PB7ypRcz+uamnqgQlLJ+8jvUySPaaHvN9sFVX+Dj0k2caWsJlH4Wh0ccrA9OZB8IMqBEg3iQeW6JAECw=="
+      },
+      "Syncfusion.DataSource.WinForms": {
+        "type": "Transitive",
+        "resolved": "29.1.40",
+        "contentHash": "jueaLh4hy0gcd8GW2Nb4pRB2eZwSELwu1/Q86YxwB5URbZ0yESy8MKFrax/otV2OU5ELTat0hArA5QGxL0RofQ=="
+      },
+      "Syncfusion.GridCommon.WinForms": {
+        "type": "Transitive",
+        "resolved": "29.1.40",
+        "contentHash": "6dLB3mtc0on61bLe12j6hhcXSm+3xXgAscsyY82b6ZSUyK+/Ttka7zuZqmW/Ss5a+mCzec4eiKsPE21p27SZxQ=="
+      },
+      "Syncfusion.Licensing": {
+        "type": "Transitive",
+        "resolved": "29.1.40",
+        "contentHash": "nt2AogC2Zui0fJMrHa7CPzYPapebPVIP/9hN2/fjT/665Z4MgM3//mX8pPzXAKIuKQW0TcK+rfBrCG+EhLMEiw=="
+      },
+      "Syncfusion.SfInput.WinForms": {
+        "type": "Transitive",
+        "resolved": "29.1.40",
+        "contentHash": "HeQrCBvE8zaI7Ez5r0EKDsBmtbq/YUO/XWlZ/0TnCMalSwjM6ZOIuVuPJii56J1edLHX1jBVCJTDyrkUULYHpQ==",
+        "dependencies": {
+          "Microsoft.WinForms.Designer.SDK": "1.6.0",
+          "Syncfusion.Core.WinForms": "29.1.40",
+          "Syncfusion.Licensing": "29.1.40",
+          "Syncfusion.Shared.Base": "29.1.40"
+        }
+      },
+      "Syncfusion.SfListView.WinForms": {
+        "type": "Transitive",
+        "resolved": "29.1.40",
+        "contentHash": "2vMhyZgI0L0HZFqOWNYHCo4c/ikXosof/AfcJSC0fxN99j5v00ZPU1BRdeM2Q9vf9n+kojx9M5CCLJc484Areg==",
+        "dependencies": {
+          "Syncfusion.Core.WinForms": "29.1.40",
+          "Syncfusion.DataSource.WinForms": "29.1.40",
+          "Syncfusion.GridCommon.WinForms": "29.1.40",
+          "Syncfusion.Licensing": "29.1.40",
+          "Syncfusion.Shared.Base": "29.1.40"
+        }
+      },
+      "Syncfusion.Shared.Base": {
+        "type": "Transitive",
+        "resolved": "29.1.40",
+        "contentHash": "Bz91xb9FM3tNuZMBgn/odeLTbp3azQ8v+H+Hl/46Cr03+9UX1jD6dJ0SAg4mBBVseVnBCfYKt+lpXJCjkgytOQ==",
+        "dependencies": {
+          "Microsoft.WinForms.Designer.SDK": "1.6.0",
+          "Syncfusion.Licensing": "29.1.40"
+        }
+      },
+      "System.CodeDom": {
+        "type": "Transitive",
+        "resolved": "4.6.0",
+        "contentHash": "ArWGZOxPhOaJUd4YgvbTxGZDbVDJHPAOQNiJIpbRDPW6v2NT5xkallQv1zpu8Rwwb5Z3iZ1jwWA4gSQuWgR+jw=="
+      },
+      "System.Composition": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "d7wMuKQtfsxUa7S13tITC8n1cQzewuhD5iDjZtK2prwFfKVzdYtgrTHgjaV03Zq7feGQ5gkP85tJJntXwInsJA==",
+        "dependencies": {
+          "System.Composition.AttributedModel": "6.0.0",
+          "System.Composition.Convention": "6.0.0",
+          "System.Composition.Hosting": "6.0.0",
+          "System.Composition.Runtime": "6.0.0",
+          "System.Composition.TypedParts": "6.0.0"
+        }
+      },
+      "System.Composition.AttributedModel": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "WK1nSDLByK/4VoC7fkNiFuTVEiperuCN/Hyn+VN30R+W2ijO1d0Z2Qm0ScEl9xkSn1G2MyapJi8xpf4R8WRa/w=="
+      },
+      "System.Composition.Convention": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "XYi4lPRdu5bM4JVJ3/UIHAiG6V6lWWUlkhB9ab4IOq0FrRsp0F4wTyV4Dj+Ds+efoXJ3qbLqlvaUozDO7OLeXA==",
+        "dependencies": {
+          "System.Composition.AttributedModel": "6.0.0"
+        }
+      },
+      "System.Composition.Hosting": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "w/wXjj7kvxuHPLdzZ0PAUt++qJl03t7lENmb2Oev0n3zbxyNULbWBlnd5J5WUMMv15kg5o+/TCZFb6lSwfaUUQ==",
+        "dependencies": {
+          "System.Composition.Runtime": "6.0.0"
+        }
+      },
+      "System.Composition.Runtime": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "qkRH/YBaMPTnzxrS5RDk1juvqed4A6HOD/CwRcDGyPpYps1J27waBddiiq1y93jk2ZZ9wuA/kynM+NO0kb3PKg=="
+      },
+      "System.Composition.TypedParts": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "iUR1eHrL8Cwd82neQCJ00MpwNIBs4NZgXzrPqx8NJf/k4+mwBO0XCRmHYJT4OLSwDDqh5nBLJWkz5cROnrGhRA==",
+        "dependencies": {
+          "System.Composition.AttributedModel": "6.0.0",
+          "System.Composition.Hosting": "6.0.0",
+          "System.Composition.Runtime": "6.0.0"
+        }
+      },
+      "SwissPension.WasmPrototype.Common": {
+        "type": "Project",
+        "dependencies": {
+          "Google.Protobuf": "[3.30.2, )",
+          "Grpc.Net.Client": "[2.71.0, )",
+          "Grpc.Net.Client.Web": "[2.71.0, )"
+        }
+      }
+    }
+  }
+}
