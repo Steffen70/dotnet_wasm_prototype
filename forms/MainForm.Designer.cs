@@ -77,6 +77,7 @@
             sfbHelloWorld.Size = new System.Drawing.Size(391, 38);
             sfbHelloWorld.TabIndex = 0;
             sfbHelloWorld.Text = "Hello World";
+            sfbHelloWorld.Click += sfbHelloWorld_Click;
             // 
             // sfbFetchUsers
             // 

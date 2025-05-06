@@ -1,6 +1,6 @@
 using System.Security.Cryptography.X509Certificates;
-using SwissPension.WasmPrototype.Backend.Extensions;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using SwissPension.WasmPrototype.Backend.Extensions;
 
 namespace SwissPension.WasmPrototype.Backend;
 
@@ -9,8 +9,6 @@ public class Program
     private const string ApiPortEnvironmentVariable = "API_PORT";
 
     private const string CorsPolicyName = "ClientPolicy";
-    
-    internal const string HttpClientName = "CustomHttpClient";
 
     public static void Main(string[] args)
     {
@@ -36,11 +34,11 @@ public class Program
         // Configure the Kestrel server with the certificate and the API port
         builder.WebHost.ConfigureKestrel(options => options.ListenLocalhost(apiPort, listenOptions =>
         {
-            var pemPath = Path.Combine(basePath,"localhost.pem");
+            var pfxFile = Path.Combine(basePath, "localhost.pfx");
             var logger = listenOptions.ApplicationServices.GetRequiredService<ILogger<Program>>();
-            logger.LogInformation($"Using certificate from {pemPath}");
+            logger.LogInformation($"Using certificate from {pfxFile}");
 
-            listenOptions.UseHttps(X509Certificate2.CreateFromPemFile(pemPath));
+            listenOptions.UseHttps(new X509Certificate2(pfxFile, ""));
             // Enable HTTP/2 and HTTP/1.1 for gRPC-Web compatibility
             listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
         }));
@@ -59,44 +57,6 @@ public class Program
         }));
 
         builder.Services.AddGrpc();
-
-        // Add custom HttpClient with the certificate handler to talk to other gRPC services
-        builder.Services.AddHttpClient(HttpClientName).ConfigurePrimaryHttpMessageHandler(serviceProvider =>
-        {
-            var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
-
-            var publicKeyPath = Path.Combine(basePath,"localhost.crt");
-            logger.LogInformation($"Using public key from {publicKeyPath}");
-
-            // Load the certificate from the environment variable
-            var certificate = X509Certificate2.CreateFromPemFile(publicKeyPath);
-
-            // Expected thumbprint and issuer of the certificate for validation
-            var expectedThumbprint = certificate.Thumbprint;
-            var expectedIssuer = certificate.Issuer;
-
-            logger.LogInformation($"Creating custom HttpClient with certificate handler for {expectedIssuer}");
-
-            // Create the gRPC channels and clients with the custom certificate handler
-            var handler = new HttpClientHandler();
-            handler.ClientCertificates.Add(certificate);
-
-            handler.ServerCertificateCustomValidationCallback = (_, cert, _, _) =>
-                cert?.Issuer == expectedIssuer && cert.Thumbprint == expectedThumbprint;
-
-            return handler;
-        });
-
-        // Add the custom HttpClient to the service provider
-        builder.Services.AddTransient(serviceProvider =>
-        {
-            var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
-
-            var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
-            logger.LogInformation("Creating custom HttpClient with certificate handler");
-
-            return httpClientFactory.CreateClient(HttpClientName);
-        });
 
         var app = builder.Build();
 

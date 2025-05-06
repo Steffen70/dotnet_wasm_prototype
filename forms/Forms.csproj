@@ -1,24 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
-		<AssemblyName>SwissPension.WasmPrototype.Forms</AssemblyName>
-		<RootNamespace>$(AssemblyName)</RootNamespace>
-		<TargetFramework>net8.0-windows</TargetFramework>
-		<UseWindowsForms>true</UseWindowsForms>
-		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-	</PropertyGroup>
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <AssemblyName>SwissPension.WasmPrototype.Forms</AssemblyName>
+        <RootNamespace>$(AssemblyName)</RootNamespace>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <UseWindowsForms>true</UseWindowsForms>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    </PropertyGroup>
 
-	<Target Name="ForceClean" AfterTargets="Clean">
-		<RemoveDir Directories="$(MSBuildProjectDirectory)/bin" />
-	</Target>
+    <Target Name="ForceClean" AfterTargets="Clean">
+        <RemoveDir Directories="$(MSBuildProjectDirectory)/bin"/>
+    </Target>
 
-	<ItemGroup>
-		<PackageReference Include="Syncfusion.SfDataGrid.WinForms" Version="29.1.40" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Syncfusion.SfDataGrid.WinForms" Version="29.1.40"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.*"/>
+    </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="../common/Common.csproj"/>
-	</ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="../common/Common.csproj"/>
+    </ItemGroup>
 
 </Project>

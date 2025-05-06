@@ -27,14 +27,14 @@ internal static partial class Interop
 
     [JSImport("globalThis.addRecordToGrid")]
     internal static partial void AddRecordToGrid(JSObject record);
-    
+
     [JSExport]
     internal static void SetText(string id, string text) => Program.SetText(id, text);
-    
+
     // fire-and-forget
     [JSExport]
-    internal static void HelloWorld() => Program.HelloWorldAsync(); 
-    
+    internal static void HelloWorld() => Program.HelloWorldAsync();
+
     [JSExport]
-    internal static void FetchUsers() => Program.FetchUsersAsync(); 
+    internal static void FetchUsers() => Program.FetchUsersAsync();
 }

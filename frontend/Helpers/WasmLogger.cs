@@ -8,7 +8,7 @@ public class WasmLoggerProvider : ILoggerProvider
 {
     private readonly ConcurrentDictionary<string, WasmLogger> _loggers = new();
 
-    public ILogger CreateLogger(string categoryName) => _loggers.GetOrAdd(categoryName, name => new WasmLogger(name));
+    public ILogger CreateLogger(string categoryName) => _loggers.GetOrAdd(categoryName, name => new(name));
 
     public void Dispose()
     {

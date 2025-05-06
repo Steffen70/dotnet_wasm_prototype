@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <AssemblyName>SwissPension.WasmPrototype.Backend</AssemblyName>
@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <Target Name="ForceClean" AfterTargets="Clean">
-        <RemoveDir Directories="$(MSBuildProjectDirectory)/bin" />
+        <RemoveDir Directories="$(MSBuildProjectDirectory)/bin"/>
     </Target>
 
     <ItemGroup>
@@ -24,13 +24,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="../cert/localhost.crt">
+        <Content Include="../cert/localhost.pfx">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-            <Link>cert/localhost.crt</Link>
-        </Content>
-        <Content Include="../cert/localhost.pem">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-            <Link>cert/localhost.pem</Link>
+            <Link>cert/localhost.pfx</Link>
         </Content>
     </ItemGroup>
 

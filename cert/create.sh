@@ -28,8 +28,13 @@ openssl x509 -req \
   -extfile localhost.conf \
   -extensions req_ext > /dev/null 2>&1
 
-echo "[6/6] Combining cert and key into PEM (localhost.pem)..."
-cat localhost.crt localhost.key > localhost.pem
+echo "[6/6] Creating passwordless PFX (localhost.pfx)..."
+openssl pkcs12 -export \
+  -out localhost.pfx \
+  -inkey localhost.key \
+  -in localhost.crt \
+  -certfile root_ca.crt \
+  -passout pass:
 
 echo "Done"
 echo ""

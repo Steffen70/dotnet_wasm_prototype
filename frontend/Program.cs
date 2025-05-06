@@ -55,10 +55,8 @@ public class Program
             using var call = AdminClient.FetchUsers(new());
 
             await foreach (var user in call.ResponseStream.ReadAllAsync())
-            {
                 // Convert gRPC user to JSObject and add to grid
                 Interop.AddRecordToGrid(user.ToJsObject());
-            }
         }
         catch (Exception ex)
         {
@@ -79,11 +77,10 @@ public class Program
             Logger.LogInformation($"Creating gRPC channel for address: {BuildConstants.ApiUrl}");
 
             var grpcWebHandler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
-            var httpClient = new HttpClient(grpcWebHandler);
 
             var channel = GrpcChannel.ForAddress(BuildConstants.ApiUrl, new()
             {
-                HttpClient = httpClient,
+                HttpHandler = grpcWebHandler,
                 LoggerFactory = loggerFactory
             });
 
@@ -94,13 +91,9 @@ public class Program
             var errorMessage = $"Error in Main: {ex.Message} stack trace: {ex.StackTrace}";
 
             if (Logger == null)
-            {
                 Console.WriteLine(errorMessage);
-            }
             else
-            {
                 Logger.LogError(ex, "An error occurred during the initialization process.");
-            }
         }
         finally
         {

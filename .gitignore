@@ -11,3 +11,4 @@ Publish/
 .vs/
 **/Properties/launchSettings.json
 *.user
+*.editorconfig
