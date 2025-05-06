@@ -33,6 +33,19 @@ sudo cp root_ca.pem /usr/local/share/ca-certificates/root_ca.crt
 sudo update-ca-certificates
 ```
 
+#### Install the Root CA Certificate (Windows)
+
+1. **Press `Win + R`**, type `mmc`, and press **Enter**.
+2. In MMC, go to **File → Add/Remove Snap-in...**
+3. Select **Certificates** and click **Add**.
+4. Choose **Computer account**, then **Next → Finish → OK**.
+5. In the left pane, expand **Certificates (Local Computer)** → **Trusted Root Certification Authorities** → **Certificates**.
+6. **Right-click** on **Certificates**, then choose **All Tasks → Import...**
+7. Click **Next**, **Browse** to your `root_ca.crt` file (select "All Files _._" if needed).
+8. Make sure the certificate store is set to **Trusted Root Certification Authorities**.
+9. Click **Next → Finish**.
+10. You should see a success message. Close MMC and choose **No** when asked to save the console settings.
+
 #### Brave (or Chrome):
 
 1.  Open Brave and go to chrome://settings/security.
