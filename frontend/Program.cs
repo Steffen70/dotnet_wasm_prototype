@@ -1,20 +1,20 @@
 using System;
 using System.Net.Http;
-using System.Threading.Tasks;
-using Grpc.Core;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 using Microsoft.Extensions.Logging;
 using SwissPension.WasmPrototype.Common;
+using SwissPension.WasmPrototype.Common.Services;
 using SwissPension.WasmPrototype.Frontend.Helpers;
+using SwissPension.WasmPrototype.Frontend.UiAdapters;
 
 namespace SwissPension.WasmPrototype.Frontend;
 
 public class Program
 {
-    internal static Admin.AdminClient AdminClient { get; private set; }
+    internal static UserService UserService { get; private set; }
 
-    internal static ILogger Logger { get; private set; }
+    internal static ILogger<Program> Logger { get; private set; }
 
     internal static void SetText(string id, string text)
     {
@@ -37,40 +37,12 @@ public class Program
         }
     }
 
-    internal static async Task HelloWorldAsync()
-    {
-        var response = await AdminClient.HelloWorldAsync(new());
-        var message = response.Message;
-        Logger.LogInformation($"Received response from server: {message}");
-        // Set JS DOM text or call JS function with result
-        SetText("output", message);
-    }
-
-    internal static async Task FetchUsersAsync()
-    {
-        Logger.LogInformation("Fetching users...");
-
-        try
-        {
-            using var call = AdminClient.FetchUsers(new());
-
-            await foreach (var user in call.ResponseStream.ReadAllAsync())
-                // Convert gRPC user to JSObject and add to grid
-                Interop.AddRecordToGrid(user.ToJsObject());
-        }
-        catch (Exception ex)
-        {
-            Logger.LogError(ex, "FetchUsers failed.");
-        }
-    }
-
     public static void Main()
     {
         try
         {
             var loggerFactory = LoggerFactory.Create(builder => { builder.AddProvider(new WasmLoggerProvider()); });
-
-            Logger = loggerFactory.CreateLogger(typeof(Program).Namespace!);
+            Logger = loggerFactory.CreateLogger<Program>();
 
             Logger.LogInformation("WASM loaded successfully.");
 
@@ -84,7 +56,9 @@ public class Program
                 LoggerFactory = loggerFactory
             });
 
-            AdminClient = new(channel);
+            var adminClient = new Admin.AdminClient(channel);
+
+            UserService = new(loggerFactory, adminClient, new WebGridAdapter<User>());
         }
         catch (Exception ex)
         {

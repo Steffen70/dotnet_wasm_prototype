@@ -33,8 +33,8 @@ internal static partial class Interop
 
     // fire-and-forget
     [JSExport]
-    internal static void HelloWorld() => Program.HelloWorldAsync();
+    internal static void HelloWorld() => Program.UserService.HelloWorldAsync();
 
     [JSExport]
-    internal static void FetchUsers() => Program.FetchUsersAsync();
+    internal static void FetchUsers() => Program.UserService.FetchUsersAsync();
 }

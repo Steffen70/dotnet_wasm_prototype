@@ -96,6 +96,7 @@
             sfdgUsers.AccessibleName = "Table";
             sfdgUsers.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             sfdgUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+            sfdgUsers.EnableDataVirtualization = true;
             sfdgUsers.Location = new System.Drawing.Point(3, 53);
             sfdgUsers.Name = "sfdgUsers";
             sfdgUsers.ShowRowHeader = true;

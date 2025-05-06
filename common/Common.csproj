@@ -1,40 +1,41 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<AssemblyName>SwissPension.WasmPrototype.Common</AssemblyName>
-		<RootNamespace>$(AssemblyName)</RootNamespace>
-		<TargetFramework>netstandard2.1</TargetFramework>
-		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-	</PropertyGroup>
+    <PropertyGroup>
+        <AssemblyName>SwissPension.WasmPrototype.Common</AssemblyName>
+        <RootNamespace>$(AssemblyName)</RootNamespace>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
 
-	<Target Name="ForceClean" AfterTargets="Clean">
-		<RemoveDir Directories="$(MSBuildProjectDirectory)/bin" />
-	</Target>
+    <Target Name="ForceClean" AfterTargets="Clean">
+        <RemoveDir Directories="$(MSBuildProjectDirectory)/bin"/>
+    </Target>
 
-	<ItemGroup>
-		<PackageReference Include="Google.Protobuf" Version="3.30.2"/>
-		<PackageReference Include="Grpc.Net.Client" Version="2.71.0"/>
-		<PackageReference Include="Grpc.Net.Client.Web" Version="2.71.0"/>
-		<PackageReference Include="Grpc.Tools" Version="2.71.0" PrivateAssets="All"/>
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Google.Protobuf" Version="3.30.2"/>
+        <PackageReference Include="Grpc.Net.Client" Version="2.71.0"/>
+        <PackageReference Include="Grpc.Net.Client.Web" Version="2.71.0"/>
+        <PackageReference Include="Grpc.Tools" Version="2.71.0" PrivateAssets="All"/>
+    </ItemGroup>
 
-	<PropertyGroup>
-		<!-- fallback value, can be overriden with -p:ApiUrl=$API_URL -->
-		<ApiUrl>https://localhost:8443/</ApiUrl>
-	</PropertyGroup>
+    <PropertyGroup>
+        <!-- fallback value, can be overriden with -p:ApiUrl=$API_URL -->
+        <ApiUrl>https://localhost:8443/</ApiUrl>
+    </PropertyGroup>
 
-	<!-- Generate BuildConstants.cs before building -->
-	<Target Name="GenerateBuildConstants" BeforeTargets="PrepareForBuild">
-		<Exec Command='pwsh -NoProfile -File "$(MSBuildProjectDirectory)/GenerateBuildConstants.ps1" -ApiUrl $(ApiUrl)' />
-	</Target>
+    <!-- Generate BuildConstants.cs before building -->
+    <Target Name="GenerateBuildConstants" BeforeTargets="PrepareForBuild">
+        <Exec Command='pwsh -NoProfile -File "$(MSBuildProjectDirectory)/GenerateBuildConstants.ps1" -ApiUrl $(ApiUrl)'/>
+    </Target>
 
-	<!-- Exclude template files from the build -->
-	<ItemGroup>
-		<Compile Remove="*.template.cs" />
-	</ItemGroup>
+    <!-- Exclude template files from the build -->
+    <ItemGroup>
+        <Compile Remove="*.template.cs"/>
+    </ItemGroup>
 
-	<ItemGroup>
-		<Protobuf Include="../protos/*.proto" GrpcServices="Client"/>
-	</ItemGroup>
+    <ItemGroup>
+        <Protobuf Include="../protos/*.proto" GrpcServices="Client"/>
+    </ItemGroup>
 
 </Project>

@@ -20,17 +20,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Uno.Wasm.Bootstrap" Version="8.0.*" />
+        <PackageReference Include="Uno.Wasm.Bootstrap" Version="8.0.*"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.*"/>
     </ItemGroup>
-	
-	<ItemGroup>
+
+    <ItemGroup>
         <ProjectReference Include="../common/Common.csproj"/>
     </ItemGroup>
 
     <Target Name="ForceClean" AfterTargets="Clean">
-        <RemoveDir Directories="$(MSBuildProjectDirectory)/bin" />
-        <RemoveDir Directories="$(MSBuildProjectDirectory)/Publish" />
+        <RemoveDir Directories="$(MSBuildProjectDirectory)/bin"/>
+        <RemoveDir Directories="$(MSBuildProjectDirectory)/Publish"/>
     </Target>
 
     <Target Name="PatchUnoArtifacts" AfterTargets="Publish">
@@ -39,15 +39,15 @@
             <UnoPackageGuid>$([System.IO.Path]::GetFileName('$(UnoPackageDir)'))</UnoPackageGuid>
         </PropertyGroup>
 
-        <Exec Command='pwsh -NoProfile -File PatchUnoArtifacts.ps1 -UnoPackageGuid "$(UnoPackageGuid)" -UnoPackageDir "$(UnoPackageDir)" -PublishDir "$(PublishDir)"' />
+        <Exec Command="pwsh -NoProfile -File PatchUnoArtifacts.ps1 -UnoPackageGuid &quot;$(UnoPackageGuid)&quot; -UnoPackageDir &quot;$(UnoPackageDir)&quot; -PublishDir &quot;$(PublishDir)&quot;"/>
 
         <!-- Copy ICU file to expected location/name -->
         <ItemGroup>
-            <IcuSource Include="$(UnoPackageDir)/managed/icudt_EFIGS.dat" />
+            <IcuSource Include="$(UnoPackageDir)/managed/icudt_EFIGS.dat"/>
             <!-- <IcuSourceBr Include="$(UnoPackageDir)/managed/icudt_EFIGS.dat.br" /> -->
         </ItemGroup>
 
-        <Copy SourceFiles="@(IcuSource)" DestinationFiles="$(UnoPackageDir)/managed/icudt.dat" SkipUnchangedFiles="true" />
+        <Copy SourceFiles="@(IcuSource)" DestinationFiles="$(UnoPackageDir)/managed/icudt.dat" SkipUnchangedFiles="true"/>
         <!-- <Copy SourceFiles="@(IcuSourceBr)" DestinationFiles="$(UnoPackageDir)/managed/icudt.dat.br" SkipUnchangedFiles="true" /> -->
     </Target>
 
