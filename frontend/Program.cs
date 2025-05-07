@@ -60,7 +60,7 @@ public class Program
 
             var adminClient = new Admin.AdminClient(channel);
 
-            UserService = new(loggerFactory, adminClient, new WebGridAdapter<User>(wasmUiThreadDispatcher));
+            UserService = new(loggerFactory, adminClient, new WebGridAdapter<User>(wasmUiThreadDispatcher, loggerFactory));
         }
         catch (Exception ex)
         {
