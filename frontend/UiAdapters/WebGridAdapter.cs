@@ -1,13 +1,13 @@
-﻿using SwissPension.WasmPrototype.Common.UiAdapters;
+﻿using System.Diagnostics.CodeAnalysis;
+using SwissPension.WasmPrototype.Common.UiAdapters;
 using SwissPension.WasmPrototype.Frontend.Helpers;
-using System.Diagnostics.CodeAnalysis;
 
 namespace SwissPension.WasmPrototype.Frontend.UiAdapters;
 
-public class WebGridAdapter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T> : IGridAdapter<T> where T : class
+public class WebGridAdapter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(WasmUiThreadDispatcher wasmUiThreadDispatcher) : IGridAdapter<T> where T : class
 {
     public void AddRow(T item)
     {
-        Interop.AddRecordToGrid(item.ToJsObject());
+        wasmUiThreadDispatcher.RunOnMainThread(() => { Interop.AddRecordToGrid(item.ToJsObject()); });
     }
 }

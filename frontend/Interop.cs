@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices.JavaScript;
+using System.Threading.Tasks;
 
 namespace SwissPension.WasmPrototype.Frontend;
 
@@ -33,8 +34,8 @@ internal static partial class Interop
 
     // fire-and-forget
     [JSExport]
-    internal static void HelloWorld() => Program.UserService.HelloWorldAsync();
+    internal static void HelloWorld() => Task.Run(Program.UserService.HelloWorldAsync);
 
     [JSExport]
-    internal static void FetchUsers() => Program.UserService.FetchUsersAsync();
+    internal static void FetchUsers() => Task.Run(Program.UserService.FetchUsersAsync);
 }

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WATCHED_EXTENSIONS=("cs" "html" "css" "js" "csproj")
+WATCHED_EXTENSIONS=("cs" "html" "js")
 EXT_PATTERN=$(IFS="|" ; echo "${WATCHED_EXTENSIONS[*]}")
 
 # Loop through and print filename + contents

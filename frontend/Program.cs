@@ -46,6 +46,8 @@ public class Program
 
             Logger.LogInformation("WASM loaded successfully.");
 
+            var wasmUiThreadDispatcher = new WasmUiThreadDispatcher();
+
             Logger.LogInformation($"Creating gRPC channel for address: {BuildConstants.ApiUrl}");
 
             var grpcWebHandler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
@@ -58,7 +60,7 @@ public class Program
 
             var adminClient = new Admin.AdminClient(channel);
 
-            UserService = new(loggerFactory, adminClient, new WebGridAdapter<User>());
+            UserService = new(loggerFactory, adminClient, new WebGridAdapter<User>(wasmUiThreadDispatcher));
         }
         catch (Exception ex)
         {
