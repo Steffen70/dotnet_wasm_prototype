@@ -25,12 +25,21 @@ internal static partial class Interop
 
     [JSImport("globalThis.createPlainJsObject")]
     internal static partial JSObject CreatePlainJsObject();
-
-    [JSImport("globalThis.addRecordToGrid")]
-    internal static partial void AddRecordToGrid(JSObject record);
+    
+    [JSImport("globalThis.createPlainJsArray")]
+    internal static partial JSObject CreatePlainJsArray();
+    
+    [JSImport("Array.prototype.push.call")]
+    internal static partial int PushToArray(JSObject array, JSObject item);
+    
+    [JSImport("globalThis.handleUsersReady")]
+    internal static partial void HandleUsersReady();
 
     [JSExport]
     internal static void SetText(string id, string text) => Program.SetText(id, text);
+
+    [JSExport]
+    internal static JSObject FetchGridData(int skip, int take) => Program.UserGridAdapter.FetchGridData(skip, take);
 
     // fire-and-forget
     [JSExport]

@@ -12,6 +12,7 @@ namespace SwissPension.WasmPrototype.Frontend;
 
 public class Program
 {
+    internal static WebGridAdapter<User> UserGridAdapter { get; private set; }
     internal static UserService UserService { get; private set; }
 
     internal static ILogger<Program> Logger { get; private set; }
@@ -60,7 +61,8 @@ public class Program
 
             var adminClient = new Admin.AdminClient(channel);
 
-            UserService = new(loggerFactory, adminClient, new WebGridAdapter<User>(wasmUiThreadDispatcher, loggerFactory));
+            UserGridAdapter = new WebGridAdapter<User>(wasmUiThreadDispatcher, loggerFactory);
+            UserService = new(loggerFactory, adminClient, UserGridAdapter);
         }
         catch (Exception ex)
         {
