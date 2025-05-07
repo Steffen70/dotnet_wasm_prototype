@@ -12,3 +12,4 @@ Publish/
 **/Properties/launchSettings.json
 *.user
 *.editorconfig
+e2e.log
