@@ -36,6 +36,8 @@ public class UserService(ILoggerFactory loggerFactory, Admin.AdminClient adminCl
             {
                 gridAdapter.AddRow(user);
             }
+            
+            gridAdapter.StreamEnd();
         }
         catch (Exception ex)
         {

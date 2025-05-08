@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.InteropServices.JavaScript;
@@ -32,6 +33,9 @@ public static class JsInteropExtensions
                     break;
                 case float f:
                     jsObject.SetProperty(property.Name, f);
+                    break;
+                case JSObject jsItem:
+                    jsObject.SetProperty(property.Name, jsItem);
                     break;
                 case null:
                     jsObject.SetProperty(property.Name, (string)null!);

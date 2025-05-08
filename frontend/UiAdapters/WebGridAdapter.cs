@@ -9,19 +9,33 @@ using SwissPension.WasmPrototype.Frontend.Helpers;
 
 namespace SwissPension.WasmPrototype.Frontend.UiAdapters;
 
-public class WebGridAdapter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(WasmUiThreadDispatcher dispatcher, ILoggerFactory loggerFactory) : IGridAdapter<T> where T : class
+public class WebGridAdapter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(WasmUiThreadDispatcher dispatcher, ILoggerFactory loggerFactory, string gridId) : IGridAdapter<T> where T : class
 {
     private readonly ILogger<WebGridAdapter<T>> _logger = loggerFactory.CreateLogger<WebGridAdapter<T>>();
     private readonly ConcurrentQueue<T> _records = new();
 
     public void AddRow(T item)
     {
-        var wasEmpty = _records.IsEmpty;
-        
+        var firstPageLoaded = _records.Count == 10;
+
         _records.Enqueue(item);
+
+        if (!firstPageLoaded) return;
         
-        if(wasEmpty)
-            dispatcher.RunOnMainThread(Interop.HandleUsersReady);
+        _logger.LogInformation("First page loaded, signalling users ready...");
+        dispatcher.RunOnMainThread(() => Interop.HandleFirstPageReady(gridId));
+    }
+
+    public void StreamEnd()
+    {
+        _logger.LogInformation($"Stream ended, total records: { _records.Count }");
+        dispatcher.RunOnMainThread(() => Interop.HandleStreamEnd(gridId, _records.Count));
+    }
+
+    private class GridPage
+    {
+        public JSObject Data { get; init; }
+        public int Count { get; init; }
     }
 
     public JSObject FetchGridData(int skip, int take)
@@ -29,27 +43,26 @@ public class WebGridAdapter<[DynamicallyAccessedMembers(DynamicallyAccessedMembe
         try
         {
             var count = _records.Count;
-            _logger.LogInformation($"Current row count is {count}");
-            
-            var data = _records.Skip(skip).Take(take).Select(record => record.ToJsObject()).ToList();
-            
-            _logger.LogInformation($"Fetched {data.Count} items (skip={skip}, take={take}, total={count})");
-            
-            var jsArray = Interop.CreatePlainJsArray();
-            foreach (var jsItem in data) 
-                Interop.PushToArray(jsArray, jsItem);
-            
-            var result = Interop.CreatePlainJsObject();
-            result.SetProperty("data", jsArray);
-            result.SetProperty("count", count);
 
-            return result;
+            var jsArray = Interop.CreatePlainJsArray();
+            var itemsFetched = 0;
+            foreach (var jsItem in _records.Skip(skip).Take(take).Select(item => item.ToJsObject()))
+            {
+                itemsFetched++;
+                Interop.PushToArray(jsArray, jsItem);
+            }
+            var result = new GridPage{  Data = jsArray, Count = count };
+
+            _logger.LogInformation($"Fetched {itemsFetched} items (skip={skip}, take={take}, total={count})");
+
+            var jsResult = result.ToJsObject();
+            return jsResult;
         }
         catch (Exception ex)
         {
             _logger.LogError($"Error in FetchGridData: {ex.Message}");
         }
-        
+
         return Interop.CreatePlainJsObject();
     }
 }

@@ -14,7 +14,6 @@ public class Program
 {
     internal static WebGridAdapter<User> UserGridAdapter { get; private set; }
     internal static UserService UserService { get; private set; }
-
     internal static ILogger<Program> Logger { get; private set; }
 
     internal static void SetText(string id, string text)
@@ -61,7 +60,7 @@ public class Program
 
             var adminClient = new Admin.AdminClient(channel);
 
-            UserGridAdapter = new WebGridAdapter<User>(wasmUiThreadDispatcher, loggerFactory);
+            UserGridAdapter = new(wasmUiThreadDispatcher, loggerFactory, "#user-grid");
             UserService = new(loggerFactory, adminClient, UserGridAdapter);
         }
         catch (Exception ex)

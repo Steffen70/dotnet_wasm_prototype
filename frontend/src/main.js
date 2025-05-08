@@ -4,3 +4,11 @@ async function handleDotnetReady() {
     window.$ = exports.SwissPension.WasmPrototype.Frontend.Interop;
     console.log("Dotnet WASM ready, exports available on $");
 }
+
+globalThis.createPlainJsObject = () => {
+    return {};
+};
+
+globalThis.createPlainJsArray = () => {
+    return [];
+};

@@ -8,32 +8,23 @@ internal static partial class Interop
     [JSImport("globalThis.document.getElementById")]
     internal static partial JSObject GetElementById(string id);
 
-    [JSImport("globalThis.document.createElement")]
-    internal static partial JSObject CreateElement(string tag);
-
-    [JSImport("globalThis.document.createTextNode")]
-    internal static partial JSObject CreateTextNode(string text);
-
-    [JSImport("globalThis.Node.prototype.appendChild.call")]
-    internal static partial void AppendChild(JSObject parent, JSObject child);
-
-    [JSImport("globalThis.HTMLElement.prototype.remove.call")]
-    internal static partial void RemoveElement(JSObject element);
-
-    [JSImport("globalThis.handleDotnetReady")]
-    internal static partial void HandleDotnetReady();
-
     [JSImport("globalThis.createPlainJsObject")]
     internal static partial JSObject CreatePlainJsObject();
     
     [JSImport("globalThis.createPlainJsArray")]
     internal static partial JSObject CreatePlainJsArray();
     
-    [JSImport("Array.prototype.push.call")]
+    [JSImport("globalThis.Array.prototype.push.call")]
     internal static partial int PushToArray(JSObject array, JSObject item);
     
-    [JSImport("globalThis.handleUsersReady")]
-    internal static partial void HandleUsersReady();
+    [JSImport("globalThis.handleDotnetReady")]
+    internal static partial void HandleDotnetReady();
+    
+    [JSImport("globalThis.handleFirstPageReady")]
+    internal static partial void HandleFirstPageReady(string gridId);
+    
+    [JSImport("globalThis.handleStreamEnd")]
+    internal static partial void HandleStreamEnd(string gridId, int totalCount);
 
     [JSExport]
     internal static void SetText(string id, string text) => Program.SetText(id, text);

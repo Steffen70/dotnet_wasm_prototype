@@ -2,7 +2,30 @@ ej.base.registerLicense("Ngo9BigBOggjHTQxAR8/V1NNaF5cXmBCf1FpRmJGdld5fUVHYVZUTXx
 
 ej.grids.Grid.Inject(ej.grids.Page, ej.grids.Sort, ej.grids.Filter);
 
-var grid = new ej.grids.Grid({
+class WasmDataAdaptor extends ej.data.Adaptor {
+    constructor(fetchData) {
+        super();
+        this.ready = false;
+        this.fetchData = fetchData;
+    }
+
+    processQuery(_, query) {
+        if (!this.ready) return { result: [], count: 0 };
+
+        const pageQuery = query.queries.find(q => q.fn === "onPage").e;
+        let result = this.fetchData((pageQuery.pageIndex - 1) * pageQuery.pageSize, pageQuery.pageSize);
+
+        return {
+            result: Array.from(result.Data),
+            count: result.Count,
+        };
+    }
+}
+
+let grid = new ej.grids.Grid({
+    dataSource: new ej.data.DataManager({
+        adaptor: new WasmDataAdaptor((skip, take) => $.FetchGridData(skip, take)),
+    }),
     columns: [
         { field: "Name", headerText: "Name", width: 120, isPrimaryKey: true },
         { field: "Department", headerText: "Department", width: 150 },
@@ -17,49 +40,11 @@ var grid = new ej.grids.Grid({
 
 grid.appendTo("#user-grid");
 
-globalThis.createPlainJsObject = () => {
-    return {};
-};
-
-globalThis.createPlainJsArray = () => {
-    return [];
-};
-
-globalThis.handleUsersReady = () => {
-    class CustomAdaptor extends ej.data.Adaptor {
-        processQuery(_, query, __) {
-            const skipObj = query.queries.find(q => q.fn === "onSkip");
-            const takeObj = query.queries.find(q => q.fn === "onTake");
-
-            console.log("skip/take", { skipObj: skipObj, takeObj: takeObj });
-
-            const skip = skipObj ?? 0;
-            const top = takeObj ?? 10;
-
-            console.log("Querying data: skip=", skip, "top=", top);
-
-            return new Promise((resolve, reject) => {
-                try {
-                    var result = $.FetchGridData(skip, top);
-
-                    console.log("Query result:", result);
-
-                    resolve({
-                        result: result.data,
-                        count: result.count,
-                    });
-                } catch (ex) {
-                    console.error("Error fetching grid data:", ex);
-                    reject(ex);
-                }
-            });
-        }
-    }
-
-    const dataManager = new ej.data.DataManager({
-        adaptor: new CustomAdaptor(),
-    });
-
-    grid.dataSource = dataManager;
+globalThis.handleFirstPageReady = _ => {
+    grid.dataSource.adaptor.ready = true;
     grid.refresh();
+};
+
+globalThis.handleStreamEnd = (_, totalCount) => {
+    grid.pagerModule.pageSettings.totalRecordsCount = totalCount;
 };
