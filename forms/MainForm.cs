@@ -36,7 +36,7 @@ public partial class MainForm : Form
 
         var adminClient = new Admin.AdminClient(channel);
 
-        var userGridAdapter = new FormsGridAdapter<User>();
+        var userGridAdapter = new FormsGridAdapter<User>(loggerFactory);
         sfdgUsers.DataSource = userGridAdapter.BindingList;
 
         _userService = new(loggerFactory, adminClient, userGridAdapter);
