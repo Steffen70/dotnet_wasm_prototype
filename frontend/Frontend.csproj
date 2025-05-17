@@ -39,7 +39,7 @@
             <UnoPackageGuid>$([System.IO.Path]::GetFileName('$(UnoPackageDir)'))</UnoPackageGuid>
         </PropertyGroup>
 
-        <Exec Command="pwsh -NoProfile -File PatchUnoArtifacts.ps1 -UnoPackageGuid &quot;$(UnoPackageGuid)&quot; -UnoPackageDir &quot;$(UnoPackageDir)&quot; -PublishDir &quot;$(PublishDir)&quot;"/>
+        <Exec Command="pwsh -NoProfile -File PatchUnoArtifacts.ps1 -UnoPackageGuid $(UnoPackageGuid) -UnoPackageDir $(UnoPackageDir) -PublishDir $(PublishDir)"/>
 
         <!-- Copy ICU file to expected location/name -->
         <ItemGroup>
