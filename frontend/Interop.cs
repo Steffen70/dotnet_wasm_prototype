@@ -5,6 +5,9 @@ namespace SwissPension.WasmPrototype.Frontend;
 
 internal static partial class Interop
 {
+    [JSImport("globalThis.getOrigin")]
+    internal static partial string GetOrigin();
+    
     [JSImport("globalThis.document.getElementById")]
     internal static partial JSObject GetElementById(string id);
 

@@ -1,7 +1,11 @@
+using System;
+
 namespace SwissPension.WasmPrototype.Common
 {
     public static class BuildConstants
     {
-        public const string ApiUrl = "%API_URL%";
+        private const string InjectedApiUrl = "%API_URL%";
+        public static Func<string> ApiUrlResolver { get; set; } = () => InjectedApiUrl;
+        public static string ApiUrl => ApiUrlResolver();
     }
 }

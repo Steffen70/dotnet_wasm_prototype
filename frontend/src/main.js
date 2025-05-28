@@ -12,3 +12,5 @@ globalThis.createPlainJsObject = () => {
 globalThis.createPlainJsArray = () => {
     return [];
 };
+
+globalThis.getOrigin = () => window.location.origin;

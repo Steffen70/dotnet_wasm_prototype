@@ -20,8 +20,9 @@
     </ItemGroup>
 
     <PropertyGroup>
-        <!-- fallback value, can be overriden with -p:ApiUrl=$API_URL -->
-        <ApiUrl>https://localhost:8443/</ApiUrl>
+        <ApiUrl>$(API_URL)</ApiUrl>
+        <!-- Fallback value -->
+        <ApiUrl Condition="'$(ApiUrl)' == ''">https://localhost:8443/</ApiUrl>
     </PropertyGroup>
 
     <!-- Generate BuildConstants.cs before building -->

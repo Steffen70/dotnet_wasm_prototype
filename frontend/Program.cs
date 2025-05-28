@@ -48,6 +48,8 @@ public class Program
 
             var wasmUiThreadDispatcher = new WasmUiThreadDispatcher();
 
+            BuildConstants.ApiUrlResolver = Interop.GetOrigin;
+
             Logger.LogInformation($"Creating gRPC channel for address: {BuildConstants.ApiUrl}");
 
             var grpcWebHandler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
