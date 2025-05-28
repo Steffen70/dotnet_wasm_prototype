@@ -14,7 +14,7 @@ cert/
 ├── swisspension_dev_root_ca.mobileconfig # Mobileconfig file to install the root_ca.crt on iOS devices
 ```
 
-**Note:** You can follow the steps below to create a self-signed certificate manually or just run `./create.sh` to automate the process.
+**Note:** You can follow the steps below to create a full self-signed certificate setup manually, or simply run `./create.sh` to generate both the Root CA and localhost certificate. If the Root CA already exists, you can just update the IP in `localhost.conf` and run `./create_localhost_cert.sh` to regenerate only the localhost certificate while keeping the existing Root CA.
 
 #### Adjust IP in `localhost.conf`
 
