@@ -6,6 +6,8 @@ This is a WebAssembly-based prototype built with .NET 8 and Uno Platform.
 
 This setup guide assumes you are running **Kubuntu 24.04** with most development tools preinstalled.
 
+**Note:** For detailed setup instructions on Windows, please refer to [docs/windows.md](docs/windows.md).
+
 Only the following tools need to be manually installed:
 
 ```bash
