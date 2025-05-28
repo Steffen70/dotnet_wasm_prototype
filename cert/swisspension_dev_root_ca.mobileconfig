@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadCertificateFileName</key>
+			<string>root_ca.crt</string>
+			<key>PayloadContent</key>
+			<data>
+			LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVEVENDQXZX
+			Z0F3SUJBZ0lVUTRwbk5YME5wMlJtajVOKzdNUXFuc2hZNnhNd0RR
+			WUpLb1pJaHZjTkFRRUwKQlFBd2dZMHhDekFKQmdOVkJBWVRBa05J
+			TVEwd0N3WURWUVFJREFSQ1pYSnVNUTB3Q3dZRFZRUUhEQVJDWlhK
+			dQpNUmd3RmdZRFZRUUtEQTlUZDJsemMxQmxibk5wYjI0Z1FVY3hJ
+			VEFmQmdOVkJBTU1HRk4zYVhOelVHVnVjMmx2CmJpQkVaWFlnVW05
+			dmRDQkRRVEVqTUNFR0NTcUdTSWIzRFFFSkFSWVVZWEJ3UUhOM2FY
+			TnpjR1Z1YzJsdmJpNXUKWlhRd0hoY05NalV3TlRJNE1UQXhNRE01
+			V2hjTk1qZ3dNekUzTVRBeE1ETTVXakNCalRFTE1Ba0dBMVVFQmhN
+			QwpRMGd4RFRBTEJnTlZCQWdNQkVKbGNtNHhEVEFMQmdOVkJBY01C
+			RUpsY200eEdEQVdCZ05WQkFvTUQxTjNhWE56ClVHVnVjMmx2YmlC
+			QlJ6RWhNQjhHQTFVRUF3d1lVM2RwYzNOUVpXNXphVzl1SUVSbGRp
+			QlNiMjkwSUVOQk1TTXcKSVFZSktvWklodmNOQVFrQkZoUmhjSEJB
+			YzNkcGMzTndaVzV6YVc5dUxtNWxkRENDQVNJd0RRWUpLb1pJaHZj
+			TgpBUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBSmpCRkJDcER4YnA5
+			NUhZbUR5RC9rUTY2enZIYlhsVm4rVmJWcnowCjF0UTlyZ1pIVmZE
+			SFJ0YXJ6WTZuZjJ5aGRIRlRJU2w0SHdmTFJGeXlqQitjT1VGTFdR
+			RjNNRlpROFVhdjhKZVYKZWhnalFLdThPZTRoY0JRYVpGeGwzSmRm
+			S2Rkb0dCT3ZoTFFlTWlJVDlrWnhiNk9GdE9ra2htcWxqa0JRbkYz
+			NwpxUFpuQ1dYVUNXWkYxNVRlNXdJWkFBN0xpN1ZBUHJQcWVyWFRp
+			YU5mSEVQSHoyUkF2N3EzN3c3QXdqeHRTakRJCmpHbkNyR21Ed0ZE
+			M1YxR0ZJL3lrcm4rSkI2QW9Sa2VSL0I2aVF6dEROeng0bStmSUY5
+			WEVvM1VWVGYxOEpiVEYKNk9xMlNNaTlNQ2xiWnBKSTYzYkJwT3pM
+			Q251cG5KQ3EveWo3SmhicVh4UjRJMmtDQXdFQUFhTmpNR0V3SFFZ
+			RApWUjBPQkJZRUZJWHdLN0FhR3U0UHhUbUJmSkNTcHhPSFYySDlN
+			QjhHQTFVZEl3UVlNQmFBRklYd0s3QWFHdTRQCnhUbUJmSkNTcHhP
+			SFYySDlNQThHQTFVZEV3RUIvd1FGTUFNQkFmOHdEZ1lEVlIwUEFR
+			SC9CQVFEQWdHR01BMEcKQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUJO
+			UWpIWTRkVUh2Qy9oUmxaWCtTWFE2dkpDamlLRGp1Z25pZjNOcjAw
+			Kwp3Y2g5NE1zYlJPYnowUzZsQjRESy9VOEVVdUFnVGtMT1hkN1Na
+			cHhmWjJIZ1dEdDFHU3Y0dytFV25HZTNudjR0CkNiVTdTNEF0NUpr
+			S0ZrZTJKMnJTQkc0cGZEOURCTG16ZzdaVEt3L3R2WTVkcTNKY2dG
+			M1QvN2R6c2hKM05pT08KOE1TeVk4QS9WbkNiWXpzeTlRTi9lc2xU
+			VjFVcDdNWjVuaklCSkpTZTlrUW9zdHB3cHoyTVQ0T3U2c1Z2N2gx
+			VQpzOE5saVhEb0ZQNVlHNm1HemE5KzlFSFl5Tkc1M2liQk1Fb3ZC
+			cVhEY3VLMi9ITVZxekg0Q1JuTGlSRVlGb3RuCkZ4MzBsei9EaHk0
+			ME4rL3ZoZFdsZjNHTzIvS0tCaTV4M0VEbjVXalIwczhCCi0tLS0t
+			RU5EIENFUlRJRklDQVRFLS0tLS0K
+			</data>
+			<key>PayloadDescription</key>
+			<string>Adds a CA root certificate</string>
+			<key>PayloadDisplayName</key>
+			<string>SwissPension Dev Root CA</string>
+			<key>PayloadIdentifier</key>
+			<string>com.apple.security.root.F25572F5-619D-496F-A130-17B53EBC013D</string>
+			<key>PayloadType</key>
+			<string>com.apple.security.root</string>
+			<key>PayloadUUID</key>
+			<string>F25572F5-619D-496F-A130-17B53EBC013D</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>PayloadDisplayName</key>
+	<string>SwissPension Dev Root CA</string>
+	<key>PayloadIdentifier</key>
+	<string>net.swisspension.dev</string>
+	<key>PayloadOrganization</key>
+	<string>SwissPension AG</string>
+	<key>PayloadRemovalDisallowed</key>
+	<false/>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>4049EAFA-A8FF-48F5-89DB-40F7751D0B25</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>

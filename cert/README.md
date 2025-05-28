@@ -6,14 +6,27 @@ Breakdown of the directory structure:
 
 ```text
 cert/
-├── root_ca.crt   # Public CA cert (trusted by browser/system)
-├── root_ca.key   # Private CA key (kept secret)
-├── localhost.crt # Signed certificate for localhost
-├── localhost.key # Corresponding private key
-├── localhost.pem # Combined cert+key for Kestrel (used in .NET)
+├── root_ca.crt                           # Public CA cert (trusted by browser/system)
+├── root_ca.key                           # Private CA key (kept secret)
+├── localhost.crt                         # Signed certificate for localhost
+├── localhost.key                         # Corresponding private key
+├── localhost.pem                         # Combined cert+key for Kestrel (used in .NET)
+├── swisspension_dev_root_ca.mobileconfig # Mobileconfig file to install the root_ca.crt on iOS devices
 ```
 
 **Note:** You can follow the steps below to create a self-signed certificate manually or just run `./create.sh` to automate the process.
+
+#### Adjust IP in `localhost.conf`
+
+Open `localhost.conf` and update the `IP.1` entry under `[alt_names]` to match your computer's LAN IP:
+
+```ini
+[alt_names]
+DNS.1 = localhost
+IP.1  = 172.20.2.114    ; ← Replace with your actual LAN IP
+```
+
+**Note:** This must match the address used when accessing the dev site from your iPhone (e.g. `https://192.168.1.100:8443`).
 
 ### Installation
 
@@ -32,6 +45,21 @@ sudo cp root_ca.pem /usr/local/share/ca-certificates/root_ca.crt
 ```sh
 sudo update-ca-certificates
 ```
+
+#### Install Root CA on iPhone via Apple Configurator
+
+1. Open **Apple Configurator** and click **File → New Profile**.
+2. In the **Certificates** section, click **Configure** and select `root_ca.crt`.
+3. Fill in the **General** section (e.g. name it `SwissPension Dev Root CA`) and save the profile.
+4. With your iPhone connected via USB:
+    - Either click **Add → Profiles...** and select your `.mobileconfig`,
+    - Or transfer the `.mobileconfig` to the device and open it directly.
+5. Open the **Settings app** on your iPhone. A new section labeled **Profile Downloaded** will appear at the top.
+6. Tap it and follow the steps to install the profile (you’ll be prompted to enter your device PIN).
+7. After installation, go to **Settings → General → About → Certificate Trust Settings**.
+8. Enable trust for **SwissPension Dev Root CA** using the toggle.
+
+Once done, Safari and other apps will trust your dev server at e.g. `https://192.168.1.100:8443`.
 
 #### Install the Root CA Certificate (Windows)
 
