@@ -37,7 +37,7 @@ IP.1  = 172.20.2.114    ; ← Replace with your actual LAN IP
 **1. Copy Certificate to Trusted Store Location**
 
 ```sh
-sudo cp root_ca.pem /usr/local/share/ca-certificates/root_ca.crt
+sudo cp root_ca.crt /usr/local/share/ca-certificates/root_ca.crt
 ```
 
 **2. Update Trusted Certificates**
